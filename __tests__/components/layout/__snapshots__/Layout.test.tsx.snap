@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout check the snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="ant-layout layout"
+  >
+    <header
+      class="ant-layout-header header"
+    >
+      <div
+        class="ant-row"
+      >
+        <div
+          class="ant-col logo"
+          style="flex: 0 0 100px;"
+        >
+          <div>
+            Todos
+          </div>
+        </div>
+        <div
+          class="ant-col"
+          style="flex-basis: auto;"
+        >
+          <div
+            class="ant-row ant-row-space-between"
+          >
+            <div
+              class="ant-col ant-col-xs-0 ant-col-sm-0 ant-col-md-24"
+            >
+              <ul
+                class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark"
+                data-menu-list="true"
+                role="menu"
+                tabindex="0"
+              >
+                <li
+                  class="ant-menu-overflow-item ant-menu-item ant-menu-item-selected ant-menu-item-only-child"
+                  data-menu-id="rc-menu-uuid-test-home"
+                  role="menuitem"
+                  style="opacity: 1; order: 0;"
+                  tabindex="-1"
+                >
+                  <span
+                    class="ant-menu-title-content"
+                  >
+                    <a
+                      href="/"
+                    >
+                      HOME
+                    </a>
+                  </span>
+                </li>
+                <li
+                  class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                  role="menuitem"
+                  style="opacity: 1; order: 1;"
+                  tabindex="-1"
+                >
+                  <span
+                    class="ant-menu-title-content"
+                  >
+                    <a
+                      href="/about"
+                    >
+                      ABOUT
+                    </a>
+                  </span>
+                </li>
+                <li
+                  class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                  role="menuitem"
+                  style="opacity: 1; order: 2;"
+                  tabindex="-1"
+                >
+                  <span
+                    class="ant-menu-title-content"
+                  >
+                    <a
+                      href="/register"
+                    >
+                      REGISTER
+                    </a>
+                  </span>
+                </li>
+                <li
+                  class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                  role="menuitem"
+                  style="opacity: 1; order: 3;"
+                  tabindex="-1"
+                >
+                  <span
+                    class="ant-menu-title-content"
+                  >
+                    <a
+                      href="/sign-in"
+                    >
+                      SIGN IN
+                    </a>
+                  </span>
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal"
+                  role="none"
+                  style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;"
+                >
+                  <div
+                    aria-controls="rc-menu-uuid-test-rc-menu-more-popup"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    class="ant-menu-submenu-title"
+                    data-menu-id="rc-menu-uuid-test-rc-menu-more"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span
+                      aria-label="ellipsis"
+                      class="anticon anticon-ellipsis"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="ellipsis"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                        />
+                      </svg>
+                    </span>
+                    <i
+                      class="ant-menu-submenu-arrow"
+                    />
+                  </div>
+                </li>
+              </ul>
+              <div
+                aria-hidden="true"
+                style="display: none;"
+              />
+            </div>
+            <div
+              class="ant-col ant-col-xs-4 ant-col-xs-offset-20 ant-col-sm-3 ant-col-sm-offset-21 ant-col-md-0"
+            >
+              <div
+                class="hamburger__Button-sc-1cfzf5o-0 ZPuhh"
+              >
+                <div
+                  class="hamburger__Line1-sc-1cfzf5o-1 jGomaN"
+                />
+                <div
+                  class="hamburger__Line2-sc-1cfzf5o-2 iCtxxV"
+                />
+                <div
+                  class="hamburger__Line3-sc-1cfzf5o-3 eqZccE"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main
+      class="ant-layout-content content"
+    />
+    <footer
+      class="ant-layout-footer footer"
+    >
+      Copyright © 2021
+    </footer>
+  </section>
+</DocumentFragment>
+`;
