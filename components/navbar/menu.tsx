@@ -11,6 +11,11 @@ type MenuItem = {
   [propName: string]: any; // This catches any additional props
 };
 
+export type MenuItems = {
+  leftMenu: MenuItem[];
+  rightMenu: MenuItem[];
+};
+
 interface Props extends MenuProps {
   items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
   needUpperCase?: boolean;
