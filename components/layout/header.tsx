@@ -16,9 +16,12 @@ const Header: React.FC = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false);
   const hamburgerRef = useRef<HTMLDivElement>();
   const showDrawerHandler = () => setVisibleDrawer(true);
+
   const closeDrawerHandler = () => {
-    setVisibleDrawer(false);
-    hamburgerRef.current.classList.toggle('close');
+    if (hamburgerRef.current) {
+      setVisibleDrawer(false);
+      hamburgerRef.current.classList.toggle('close');
+    }
   };
 
   useEffect(() => {
