@@ -4,7 +4,7 @@ import styles from '../../styles/Footer.module.less';
 
 const Footer: React.FC = () => (
   <Layout.Footer className={styles.footer}>
-    Info Copyright &copy; { (new Date()).getFullYear() }
+    Copyright &copy; { (new Date()).getFullYear() }
   </Layout.Footer>
 );
 
