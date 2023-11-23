@@ -1,7 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-module.exports = nextConfig
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {}
+// module.exports = nextConfig
 
 const withAntdLess = require('next-plugin-antd-less');
 
