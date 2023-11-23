@@ -5,7 +5,7 @@ exports[`check the snapshot 1`] = `
   <footer
     class="ant-layout-footer footer"
   >
-    Copyright © 2021
+    Copyright © 2023
   </footer>
 </DocumentFragment>
 `;
