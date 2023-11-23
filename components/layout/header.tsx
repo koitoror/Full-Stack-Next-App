@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    const hamburgerElement = this.hamburgerRef.current;
+    const hamburgerElement = hamburgerRef.current;
     if (hamburgerElement) {
       hamburgerElement.classList.add('hamburger');
     }
