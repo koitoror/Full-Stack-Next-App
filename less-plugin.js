@@ -1,4 +1,4 @@
-const { webpack } = require('next-compose-plugin');
+const { webpack } = require('next-compose-plugins');
 const less = require('less');
 
 module.exports = webpack(({ config }) => {
