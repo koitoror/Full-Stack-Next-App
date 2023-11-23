@@ -1,8 +1,8 @@
-const { webpack } = require('next-compose-plugins');
+const { webpack } = require('next-compose-plugin');
 const less = require('less');
 
-module.exports = webpack(({ config }) => {
-  config.module.rules.push({
+module.exports = function (webpackConfig) {
+  webpackConfig.module.rules.push({
     test: /\.module\.less$/,
     use: [
       {
@@ -23,5 +23,5 @@ module.exports = webpack(({ config }) => {
     ],
   });
 
-  return config;
-});
+  return webpackConfig;
+};
