@@ -14,7 +14,7 @@ import { RootState } from '../../store';
 
 const Header: React.FC = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false);
-  const hamburgerRef = useRef<HTMLDivElement | undefined>();
+  const hamburgerRef = useRef<HTMLDivElement | any>();
   
   const showDrawerHandler = () => setVisibleDrawer(true);
 
