@@ -11,10 +11,15 @@ type MenuItem = {
   [propName: string]: any; // This catches any additional props
 };
 
-export type MenuItems = {
-  leftMenu: Array<MenuItem> | [];
-  rightMenu: Array<MenuItem> | [];
-};
+// export type MenuItems = {
+//   leftMenu: Array<MenuItem> | [];
+//   rightMenu: Array<MenuItem> | [];
+// };
+
+export interface MenuItems {
+  leftMenu: MenuItem[];
+  rightMenu: MenuItem[];
+}
 
 interface Props extends MenuProps {
   items: MenuItems;
