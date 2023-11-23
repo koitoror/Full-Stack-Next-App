@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Menu } from 'antd';
-import { MenuProps } from 'antd/es/menu'; 
+import { MenuProps } from 'antd/es/menu';
 
 type MenuItem = {
   key: string;
@@ -11,18 +11,8 @@ type MenuItem = {
   [propName: string]: any; // This catches any additional props
 };
 
-// export type MenuItems = {
-//   leftMenu: Array<MenuItem> | [];
-//   rightMenu: Array<MenuItem> | [];
-// };
-
-export interface MenuItems {
-  leftMenu: MenuItem[];
-  rightMenu: MenuItem[];
-}
-
 interface Props extends MenuProps {
-  items: MenuItems;
+  items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
   needUpperCase?: boolean;
 }
 
@@ -32,7 +22,7 @@ const _Menu: React.FC<Props> = ({
   onClick,
   selectedKeys,
   items,
-  needUpperCase = false
+  needUpperCase = false,
 }) => {
   return (
     <Menu
@@ -41,7 +31,7 @@ const _Menu: React.FC<Props> = ({
       onClick={onClick}
       selectedKeys={selectedKeys}
     >
-      {[...items.leftMenu].map(({ key, text, path }) => (
+      {items.leftMenu.map(({ key, text, path }) => (
         <Menu.Item key={key}>
           <Link href={path}>
             <a>{needUpperCase ? text.toUpperCase() : text}</a>
@@ -49,7 +39,7 @@ const _Menu: React.FC<Props> = ({
         </Menu.Item>
       ))}
       {mode === 'inline' ? <Menu.Divider /> : null}
-      {[...items.rightMenu].map(({ key, text, path }) => (
+      {items.rightMenu.map(({ key, text, path }) => (
         <Menu.Item key={key}>
           <Link href={path}>
             <a>{needUpperCase ? text.toUpperCase() : text}</a>
