@@ -7,6 +7,8 @@ type MenuItem = {
   key: string;
   text: string;
   path: string;
+  onClick?: (item: MenuItem) => void;
+  [propName: string]: any; // This catches any additional props
 };
 
 export type MenuItems = {
