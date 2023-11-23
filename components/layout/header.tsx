@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Layout, Row, Col, Drawer } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import styles from '../../styles/Header.module.less';
@@ -10,6 +10,8 @@ import { MenuItems } from '../navbar/menu';
 import { MenuState } from '../../store/slices/menuSlice';
 import { RootState } from '../../store';
 
+
+
 const Header: React.FC = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false);
   const hamburgerRef = useRef<HTMLDivElement>();
@@ -18,6 +20,13 @@ const Header: React.FC = () => {
     setVisibleDrawer(false);
     hamburgerRef.current.classList.toggle('close');
   };
+
+  useEffect(() => {
+    const hamburgerElement = this.hamburgerRef.current;
+    if (hamburgerElement) {
+      hamburgerElement.classList.add('hamburger');
+    }
+  }, []);
 
   const dispatch = useDispatch();
   const currentMenuItem = useSelector((state: {menu: MenuState}) => (
