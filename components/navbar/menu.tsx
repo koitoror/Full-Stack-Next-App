@@ -23,7 +23,7 @@ interface MenuItems1 {
 
 interface Props extends MenuProps {
   // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
-  items: MenuItems1;
+  items?: MenuItems1;
   needUpperCase?: boolean;
 }
 
