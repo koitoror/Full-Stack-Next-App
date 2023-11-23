@@ -2,7 +2,7 @@ const withLess = require('next-with-less');
 const path = require("path");
 
 const pathToLessFileWithVariables = path.resolve(
-  "your-file-with-antd-variables.less"
+  "./styles/variables.less"
 );
 
 module.exports = withLess({
@@ -10,8 +10,8 @@ module.exports = withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
     modifyVars: {
-        // '@primary-color': '#0050b3',
-        "primary-color": "#9900FF",
+        // "primary-color": "#9900FF",
+        '@primary-color': '#0050b3',
         "border-radius-base": "2px",
 
         /* ... */
