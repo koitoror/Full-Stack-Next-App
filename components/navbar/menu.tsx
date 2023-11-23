@@ -16,9 +16,14 @@ export type MenuItems = {
   rightMenu: MenuItem[];
 };
 
+interface MenuItems1 {
+  leftMenu: MenuItem[];
+  rightMenu: MenuItem[];
+}
+
 interface Props extends MenuProps {
   // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
-  items: MenuItems;
+  items: MenuItems1;
   needUpperCase?: boolean;
 }
 
