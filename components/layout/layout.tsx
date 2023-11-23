@@ -7,7 +7,7 @@ import Footer from './footer';
 
 const { Content } = Layout;
 
-const _Layout: React.FC = ({ children }) => (
+const _Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
   <Layout className={stylesLayout.layout}>
     <Header />
     <Content className={stylesContent.content}>{ children }</Content>
