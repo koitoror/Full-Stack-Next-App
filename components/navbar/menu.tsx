@@ -17,7 +17,8 @@ export type MenuItems = {
 };
 
 interface Props extends MenuProps {
-  items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
+  // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
+  items: MenuItems;
   needUpperCase?: boolean;
 }
 
@@ -29,6 +30,8 @@ const _Menu: React.FC<Props> = ({
   items,
   needUpperCase = false,
 }) => {
+  const menuItems = items.leftMenu.concat(items.rightMenu);
+
   return (
     <Menu
       theme={theme}
