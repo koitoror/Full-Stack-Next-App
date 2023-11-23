@@ -6,7 +6,7 @@ const pathToLessFileWithVariables = path.resolve('./styles/variables.less');
 module.exports = withLess({
   // Optional: customize Less loader options
   lessLoaderOptions: {
-    javascriptEnabled: true,
+    // javascriptEnabled: true,
     lessOptions: {
       modifyVars: {
         //   "primary-color": "#9900FF",
