@@ -9,13 +9,14 @@ module.exports = withLess({
   // Optional: customize Less loader options
   lessLoaderOptions: {
     javascriptEnabled: true,
-    modifyVars: {
-        // "primary-color": "#9900FF",
-        '@primary-color': '#0050b3',
-        "border-radius-base": "2px",
-
+    lessOptions: {
         /* ... */
-      },
+        modifyVars: {
+        //   "primary-color": "#9900FF",
+          '@primary-color': '#0050b3',
+          "border-radius-base": "2px",
+          /* ... */
+        },
       additionalData: (content) =>
       `${content}\n\n@import '${pathToLessFileWithVariables}';`,
   },
