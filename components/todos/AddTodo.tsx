@@ -3,8 +3,9 @@ import styles from '../../styles/AddTodo.module.less';
 import { Form, Input, Button, Spin, message } from 'antd';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../../store/slices/todoSlice'; // Import the async thunk action creator
+import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
+import { createAsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';  // Add import for AsyncThunkAction
 
 type FinishHandler = (
   values: {
@@ -12,13 +13,16 @@ type FinishHandler = (
   }
 ) => void;
 
+// Create an async thunk type
+type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
+
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
-  const onFinish: FinishHandler = async ({ text }) => {
+  const onFinish: FinishHandler = ({ text }) => {
     let callbackFail: (message: string) => void;
     callbackFail = (errorMessage) => message.error(errorMessage);
     const arg = {
@@ -29,7 +33,7 @@ const AddTodo: React.FC = () => {
 
     // Dispatch the async thunk action creator
     try {
-      await dispatch(addTodo(arg));
+      await (dispatch as ThunkResult<Todo>)(addTodo(arg));
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
