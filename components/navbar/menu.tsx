@@ -83,7 +83,9 @@ const _Menu: React.FC<any> = ({
       onClick={onClick}
       selectedKeys={selectedKeys}
     >
-      {items.leftMenu.map(({ key, text, path }) => (
+      {/* {items.leftMenu.map(({ key, text, path }) => ( */}
+      {items.leftMenu.map(({ key, text, path }: MenuItem) => (
+
         <Menu.Item key={key}>
           <Link href={path}>
             <a>{needUpperCase ? text.toUpperCase() : text}</a>
@@ -91,7 +93,9 @@ const _Menu: React.FC<any> = ({
         </Menu.Item>
       ))}
       {mode === 'inline' ? <Menu.Divider /> : null}
-      {items.rightMenu.map(({ key, text, path }) => (
+      {/* {items.rightMenu.map(({ key, text, path }) => ( */}
+      {items.rightMenu.map(({ key, text, path }: MenuItem) => (
+
         <Menu.Item key={key}>
           <Link href={path}>
             <a>{needUpperCase ? text.toUpperCase() : text}</a>
