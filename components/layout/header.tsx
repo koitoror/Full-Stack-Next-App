@@ -6,7 +6,7 @@ import Menu from '../navbar/menu';
 import Hamburger from '../navbar/hamburger';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrent as setCurrentMenuItem } from '../../store/slices/menuSlice';
-import { MenuItems } from '../navbar/menu';
+// import { MenuItems } from '../navbar/menu';
 import { MenuState } from '../../store/slices/menuSlice';
 import { RootState } from '../../store';
 
@@ -42,7 +42,8 @@ const Header: React.FC = () => {
 
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
-  const items: MenuItems = {
+  // const items: MenuItems = {
+  const items: any = {
     leftMenu: [
       { key: 'home', text: 'Home', path: '/' },
       { key: 'about', text: 'About', path: '/about' }
