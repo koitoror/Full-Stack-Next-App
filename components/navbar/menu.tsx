@@ -31,6 +31,10 @@ import { MenuProps } from 'antd/es/menu';
 export type MenuItems = {
   leftMenu: { key: string; text: string; path: string; }[];
   rightMenu: { key: string; text: string; path: string; }[];
+  length: number;
+  pop(): MenuItem;
+  push(menuItem: MenuItem): number;
+  concat(menuItems: MenuItem[]): MenuItems;
 };
 
 const items: MenuItems = {
