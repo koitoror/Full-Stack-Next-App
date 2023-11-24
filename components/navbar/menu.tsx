@@ -28,7 +28,7 @@ export interface MenuItem {
 //   // ... other required properties
 // }
 
-type MenuItems = {
+export type MenuItems = {
   leftMenu: { key: string; text: string; path: string; }[];
   rightMenu: { key: string; text: string; path: string; }[];
 };
