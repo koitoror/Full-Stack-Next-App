@@ -45,10 +45,10 @@ const items: MenuItems = {
 };
 
 
-interface Props extends MenuProps {
-  // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
-  items?: MenuItem[];
-  needUpperCase?: boolean;
+// interface Props extends MenuProps {
+//   // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
+//   items?: MenuItem[];
+//   needUpperCase?: boolean;
 }
 export interface MenuItem {
   key: string;
@@ -60,7 +60,7 @@ export interface MenuItem {
 }
 
 
-const _Menu: React.FC<Props> = ({
+const _Menu: React.FC<any> = ({
   theme,
   mode,
   onClick,
