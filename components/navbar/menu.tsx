@@ -12,11 +12,21 @@ export interface MenuItem {
 };
 
 // export type MenuItems = {
-export type MenuItems = {
+// export type MenuItems = {
 
+//   leftMenu: MenuItem[];
+//   rightMenu: MenuItem[];
+// };
+
+export interface MenuItems {
   leftMenu: MenuItem[];
   rightMenu: MenuItem[];
-};
+  length: number;
+  pop(): MenuItem;
+  push(menuItem: MenuItem): number;
+  concat(menuItems: MenuItem[]): MenuItems;
+  // ... other required properties
+}
 
 interface Props extends MenuProps {
   // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
