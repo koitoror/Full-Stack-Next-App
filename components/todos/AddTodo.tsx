@@ -5,6 +5,7 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 type FinishHandler = (
   values: {
@@ -12,7 +13,7 @@ type FinishHandler = (
   }
 ) => void;
 
-const AddTodo: React.FC = () => {
+const AddTodo: React.FC = createAsyncThunk(() => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -76,6 +77,6 @@ const AddTodo: React.FC = () => {
       </Form>
     );
   }
-}
+});
 
 export default AddTodo;
