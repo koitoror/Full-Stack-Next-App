@@ -50,6 +50,15 @@ interface Props extends MenuProps {
   items?: MenuItem[];
   needUpperCase?: boolean;
 }
+export interface MenuItem {
+  key: string;
+  text: string;
+  path: string;
+  onClick?: (item: MenuItem) => void;
+  children?: MenuItem[]; // Add this property
+  // [propName: string]: any;
+}
+
 
 const _Menu: React.FC<Props> = ({
   theme,
