@@ -37,16 +37,16 @@ export type MenuItems = {
   concat(menuItems: MenuItem[]): MenuItems;
 };
 
-const items: MenuItems = {
-  leftMenu: [
-    { key: 'home', text: 'Home', path: '/' },
-    { key: 'about', text: 'About', path: '/about' }
-  ],
-  rightMenu: [
-    { key: 'profile', text: 'Profile', path: '/profile' },
-    { key: 'logout', text: 'Logout', path: '/logout' }
-  ]
-};
+// const items: MenuItems = {
+//   leftMenu: [
+//     { key: 'home', text: 'Home', path: '/' },
+//     { key: 'about', text: 'About', path: '/about' }
+//   ],
+//   rightMenu: [
+//     { key: 'profile', text: 'Profile', path: '/profile' },
+//     { key: 'logout', text: 'Logout', path: '/logout' }
+//   ]
+// };
 
 
 // interface Props extends MenuProps {
