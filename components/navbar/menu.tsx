@@ -49,7 +49,7 @@ const items: MenuItems = {
 //   // items: { leftMenu: MenuItem[]; rightMenu: MenuItem[] };
 //   items?: MenuItem[];
 //   needUpperCase?: boolean;
-}
+// }
 export interface MenuItem {
   key: string;
   text: string;
