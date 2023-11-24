@@ -1,3 +1,4 @@
+// AddTodo.tsx
 import React from 'react';
 import styles from '../../styles/AddTodo.module.less';
 import { Form, Input, Button, Spin, message } from 'antd';
@@ -5,13 +6,10 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
-import { createAsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';  // Add import for AsyncThunkAction
+import { createAsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';
+import { AsyncThunkArgAddTodo } from 'path-to-types'; // Update with the correct path
 
-type FinishHandler = (
-  values: {
-    text: string;
-  }
-) => void;
+type FinishHandler = (values: { text: string }) => void;
 
 // Create an async thunk type
 type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
@@ -22,9 +20,7 @@ const AddTodo: React.FC = () => {
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
-  // const onFinish: FinishHandler = ({ text }) => {
   const onFinish: FinishHandler = async ({ text }) => {
-
     let callbackFail: (message: string) => void;
     callbackFail = (errorMessage) => message.error(errorMessage);
     const arg = {
