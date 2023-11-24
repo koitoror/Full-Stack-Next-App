@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { Menu } from 'antd';
 import { MenuProps } from 'antd/es/menu';
 
-export interface MenuItem {
-  key: string;
-  text: string;
-  path: string;
-  onClick?: (item: MenuItem) => void;
-  [propName: string]: any; // This catches any additional props
-};
+// export interface MenuItem {
+//   key: string;
+//   text: string;
+//   path: string;
+//   onClick?: (item: MenuItem) => void;
+//   [propName: string]: any; // This catches any additional props
+// };
 
 // export type MenuItems = {
 // export type MenuItems = {
@@ -55,9 +55,11 @@ export interface MenuItem {
   text: string;
   path: string;
   onClick?: (item: MenuItem) => void;
-  children?: MenuItem[]; // Add this property
-  // [propName: string]: any;
+  children?: MenuItem[]; // If applicable
+  [propName: string]: any;
 }
+// [propName: string]: any;
+// }
 
 
 const _Menu: React.FC<any> = ({
