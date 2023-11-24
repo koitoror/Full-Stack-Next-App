@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
 import { createAsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';  // Add import for AsyncThunkAction
+import { AsyncThunkArgAddTodo } from './types';
 
 type FinishHandler = (
   values: {
