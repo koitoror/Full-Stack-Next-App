@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Menu } from 'antd';
 import { MenuProps } from 'antd/es/menu';
 
-type MenuItem = {
+export interface MenuItem {
   key: string;
   text: string;
   path: string;
@@ -11,7 +11,9 @@ type MenuItem = {
   [propName: string]: any; // This catches any additional props
 };
 
+// export type MenuItems = {
 export type MenuItems = {
+
   leftMenu: MenuItem[];
   rightMenu: MenuItem[];
 };
