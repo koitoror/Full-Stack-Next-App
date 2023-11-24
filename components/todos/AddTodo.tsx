@@ -3,32 +3,38 @@ import styles from '../../styles/AddTodo.module.less';
 import { Form, Input, Button, Spin, message } from 'antd';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../../store/slices/todoSlice';
+import { addTodo } from '../../store/slices/todoSlice'; // Import the async thunk action creator
 import { RootState } from '../../store';
-import { createAsyncThunk } from '@reduxjs/toolkit';
 
 type FinishHandler = (
   values: {
-    text: string
+    text: string;
   }
 ) => void;
 
-const AddTodo: React.FC = createAsyncThunk(() => {
+const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
-  const onFinish: FinishHandler = ({ text }) => {
+  const onFinish: FinishHandler = async ({ text }) => {
     let callbackFail: (message: string) => void;
     callbackFail = (errorMessage) => message.error(errorMessage);
     const arg = {
       text,
       callbackSuccess: () => message.info('Task was successfully added!'),
-      callbackFail
+      callbackFail,
     };
-    dispatch(addTodo(arg));
-    form.resetFields();
+
+    // Dispatch the async thunk action creator
+    try {
+      await dispatch(addTodo(arg));
+      form.resetFields();
+    } catch (error) {
+      console.error('Error adding todo:', error);
+      // Handle error if needed
+    }
   };
 
   const onFinishFailed = (e: ValidateErrorEntity) => {
@@ -38,9 +44,7 @@ const AddTodo: React.FC = createAsyncThunk(() => {
   const onReset = () => form.resetFields();
 
   if (isLoading) {
-    return (
-      <Spin size="large" className={styles.spin} />
-    )
+    return <Spin size="large" className={styles.spin} />;
   } else {
     return (
       <Form
@@ -59,14 +63,14 @@ const AddTodo: React.FC = createAsyncThunk(() => {
           rules={[
             {
               required: true,
-              message: 'Please input your task!'
+              message: 'Please input your task!',
             },
           ]}
         >
           <Input />
         </Form.Item>
 
-        <Form.Item wrapperCol={{sm: { offset: 6, span: 18 }}}>
+        <Form.Item wrapperCol={{ sm: { offset: 6, span: 18 } }}>
           <Button type="primary" htmlType="submit" className={styles.submit}>
             Submit
           </Button>
@@ -77,6 +81,6 @@ const AddTodo: React.FC = createAsyncThunk(() => {
       </Form>
     );
   }
-});
+};
 
 export default AddTodo;
