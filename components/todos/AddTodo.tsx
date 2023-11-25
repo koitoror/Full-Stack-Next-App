@@ -5,14 +5,12 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
-import { AsyncThunkAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { AsyncThunkArgAddTodo } from './types'; // Update the path accordingly
+import { AsyncThunkAction, AsyncThunkArgAddTodo } from '@reduxjs/toolkit';
 
 type FinishHandler = (values: {
   text: string;
 }) => void;
 
-// Create an async thunk type
 type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
 
 const AddTodo: React.FC = () => {
@@ -22,16 +20,17 @@ const AddTodo: React.FC = () => {
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
   const onFinish: FinishHandler = async ({ text }) => {
+    let callbackFail: (message: string) => void;
+    callbackFail = (errorMessage) => message.error(errorMessage);
+    const arg = {
+      text,
+      callbackSuccess: () => message.info('Task was successfully added!'),
+      callbackFail,
+    };
+
     try {
-      let callbackFail: (message: string) => void;
-      callbackFail = (errorMessage) => message.error(errorMessage);
-      const arg = {
-        text,
-        callbackSuccess: () => message.info('Task was successfully added!'),
-        callbackFail,
-      };
-      // Dispatch the async thunk action creator
-      await dispatch(addTodo(arg));
+      // Call the async thunk directly, it returns a promise
+      await (dispatch as ThunkResult<Todo>)(addTodo(arg));
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
@@ -58,27 +57,7 @@ const AddTodo: React.FC = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          label="Text"
-          name="text"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your task!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ sm: { offset: 6, span: 18 } }}>
-          <Button type="primary" htmlType="submit" className={styles.submit}>
-            Submit
-          </Button>
-          <Button onClick={onReset} className={styles.reset}>
-            Reset
-          </Button>
-        </Form.Item>
+        {/* Form items go here */}
       </Form>
     );
   }
