@@ -36,7 +36,7 @@ const AddTodo: React.FC = () => {
 
     try {
       // Call the async thunk directly, it returns a promise
-      await (dispatch as ThunkResult<Todo>)(addTodo(arg));
+      await dispatch(addTodo(arg));
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
