@@ -17,7 +17,7 @@ export type UpdateTodoResult = {
   updatedFields?: Partial<Todo>;
   error?: FirestoreError;
   status: StatusCode;
-};
+}
 
 export type RemoveTodoResult = {
   id?: string;
@@ -29,36 +29,43 @@ type Response = UpdateTodoResult | RemoveTodoResult;
 
 const collectionName = process.env.FIREBASE_TODOS_COLLECTION;
 
-const handleFirestoreError = (_error: FirestoreError): { error: FirestoreError; status: StatusCode } => {
-  const error: FirestoreError = _error;
-  let status = StatusCode.BAD_REQUEST;
-  if (error.code === 'permission-denied') {
-    status = StatusCode.UNAUTHORIZED;
-  }
-  return { error, status };
-};
-
 const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<UpdateTodoResult> => {
   try {
+    if (!id) {
+      throw new Error('ID is missing');
+    }
+
     const docRef = doc(collection(db, collectionName), id);
     await updateDoc(docRef, fieldsToUpdate);
     return { id, updatedFields: fieldsToUpdate, status: StatusCode.OK };
   } catch (error) {
-    const { error: firestoreError, status } = handleFirestoreError(error);
+    const firestoreError: FirestoreError = error;
+    let status = StatusCode.BAD_REQUEST;
+    if (firestoreError.code === 'permission-denied') {
+      status = StatusCode.UNAUTHORIZED;
+    }
     return { error: firestoreError, status };
   }
 };
 
 const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
   try {
+    if (!id) {
+      throw new Error('ID is missing');
+    }
+
     const docRef = doc(collection(db, collectionName), id);
     await deleteDoc(docRef);
     return { id, status: StatusCode.OK };
   } catch (error) {
-    const { error: firestoreError, status } = handleFirestoreError(error);
+    const firestoreError: FirestoreError = error;
+    let status = StatusCode.BAD_REQUEST;
+    if (firestoreError.code === 'permission-denied') {
+      status = StatusCode.UNAUTHORIZED;
+    }
     return { error: firestoreError, status };
   }
-};
+}
 
 const handler = async (
   req: NextApiRequest,
@@ -70,13 +77,7 @@ const handler = async (
   await runMiddleware(req, res, cors);
 
   if (req.method === 'PATCH') {
-    const id = req.query.id as string | undefined;
-    // Handle the case where id is undefined
-    if (!id) {
-      res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
-      return;
-    }
-    
+    const id = req.query.id as string;
     const fieldsToUpdate: Partial<Todo> = {
       completed: !!req.body.completed
     };
@@ -85,14 +86,10 @@ const handler = async (
   }
 
   if (req.method === 'DELETE') {
-    const id = req.query.id as string | undefined;
-    if (!id) {
-      res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
-      return;
-    }
+    const id = req.query.id as string;
     const result = await removeTodo(id);
     res.status(result.status).json(result);
   }
-};
+}
 
 export default handler;
