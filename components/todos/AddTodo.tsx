@@ -5,7 +5,13 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
-import { AsyncThunkAction, AsyncThunkArgAddTodo } from '@reduxjs/toolkit';
+import { AsyncThunkAction } from '@reduxjs/toolkit';
+
+type AsyncThunkArgAddTodo = {
+  text: string;
+  callbackSuccess: () => void;
+  callbackFail: (message: string) => void;
+};
 
 type FinishHandler = (values: {
   text: string;
@@ -22,7 +28,7 @@ const AddTodo: React.FC = () => {
   const onFinish: FinishHandler = async ({ text }) => {
     let callbackFail: (message: string) => void;
     callbackFail = (errorMessage) => message.error(errorMessage);
-    const arg = {
+    const arg: AsyncThunkArgAddTodo = {
       text,
       callbackSuccess: () => message.info('Task was successfully added!'),
       callbackFail,
