@@ -5,7 +5,6 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
-import { AsyncThunkAction } from '@reduxjs/toolkit';
 
 type AsyncThunkArgAddTodo = {
   text: string;
@@ -16,8 +15,6 @@ type AsyncThunkArgAddTodo = {
 type FinishHandler = (values: {
   text: string;
 }) => void;
-
-type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
 
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
@@ -35,7 +32,7 @@ const AddTodo: React.FC = () => {
     };
 
     try {
-      // Call the async thunk directly, it returns a promise
+      // Dispatch a regular thunk action
       await dispatch(addTodo(arg));
       form.resetFields();
     } catch (error) {
