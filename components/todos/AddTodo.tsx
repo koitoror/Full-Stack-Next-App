@@ -5,22 +5,8 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
-import { createAsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';  // Add import for AsyncThunkAction
-import { AsyncThunkArgAddTodo } from './types';
-import { ThunkAction } from 'redux-thunk';
-import { AnyAction } from 'redux';
 
-type FinishHandler = (
-  values: {
-    text: string;
-  }
-) => void;
-
-// Create an async thunk type
-// type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
-// type ThunkResult<R> = AsyncThunkAction<R, RootState, undefined, AnyAction>;
-type ThunkResult<R> = ThunkAction<R, RootState, undefined, AnyAction>;
-
+type FinishHandler = (values: { text: string }) => void;
 
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
@@ -28,25 +14,20 @@ const AddTodo: React.FC = () => {
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
-  // const onFinish: FinishHandler = ({ text }) => {
   const onFinish: FinishHandler = async ({ text }) => {
-
-    let callbackFail: (message: string) => void;
-    callbackFail = (errorMessage) => message.error(errorMessage);
-    const arg = {
-      text,
-      callbackSuccess: () => message.info('Task was successfully added!'),
-      callbackFail,
-    };
-
-    // Dispatch the async thunk action creator
     try {
-      await (dispatch as ThunkResult<Todo>)(addTodo(arg));
-      
+      let callbackFail: (message: string) => void;
+      callbackFail = (errorMessage) => message.error(errorMessage);
+      const arg = {
+        text,
+        callbackSuccess: () => message.info('Task was successfully added!'),
+        callbackFail,
+      };
+      // Dispatch the async thunk action creator
+      await dispatch(addTodo(arg));
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
-      // Handle error if needed
     }
   };
 
@@ -70,27 +51,7 @@ const AddTodo: React.FC = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          label="Text"
-          name="text"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your task!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ sm: { offset: 6, span: 18 } }}>
-          <Button type="primary" htmlType="submit" className={styles.submit}>
-            Submit
-          </Button>
-          <Button onClick={onReset} className={styles.reset}>
-            Reset
-          </Button>
-        </Form.Item>
+        {/* ... rest of the component ... */}
       </Form>
     );
   }
