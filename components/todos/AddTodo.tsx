@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
 import { AsyncThunkArgAddTodo } from './types';
+import { unwrapResult } from '@reduxjs/toolkit';
+
 
 type FinishHandler = (values: {
   text: string;
@@ -24,30 +26,35 @@ const AddTodo: React.FC = () => {
     const arg: AsyncThunkArgAddTodo = {
       text,
       callbackSuccess: () => message.info('Task was successfully added!'),
-      // callbackFail,
       callbackFail: (error) => {
         console.error('Error adding todo:', error);
       },
     };
-
+  
     try {
-      // await dispatch(addTodo(arg));
-      // await dispatch(addTodo(arg)).unwrap();
-      // form.resetFields();
-
+      // const resultAction = await dispatch(addTodo(arg));
+      
+      // // Check if the fulfilled action was dispatched
+      // if (addTodo.fulfilled.match(resultAction)) {
+      //   form.resetFields();
+      // } else {
+      //   // Handle other cases if needed
+      // }
       const resultAction = await dispatch(addTodo(arg));
-
-      if (addTodo.fulfilled.match(resultAction)) {
+      const result = unwrapResult(resultAction);
+      // Assuming addTodo fulfills with the todo object, you can access it in 'result'
+      if (result) {
         // Handle successful fulfillment
         form.resetFields();
       } else {
         // Handle other states (rejected, pending, etc.) if needed
       }
-    
+      // form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
     }
   };
+  
 
   const onFinishFailed = (e: ValidateErrorEntity) => {
     message.error(e.errorFields[0].errors[0]);
