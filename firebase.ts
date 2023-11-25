@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
+import type { Firestore } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,4 +14,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export default app;
 
-export const db = getFirestore(app);
+export const db: Firestore = getFirestore(app);
