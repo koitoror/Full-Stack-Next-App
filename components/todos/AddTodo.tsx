@@ -24,17 +24,28 @@ const AddTodo: React.FC = () => {
     const arg: AsyncThunkArgAddTodo = {
       text,
       callbackSuccess: () => message.info('Task was successfully added!'),
-      callbackFail,
+      // callbackFail,
+      callbackFail: (error) => {
+        console.error('Error adding todo:', error);
+      },
     };
 
     // Dispatch the async thunk action creator
-    await dispatch(addTodo(arg))
-      .then(() => {
-        form.resetFields();
-      })
-      .catch((error) => {
-        console.error('Error adding todo:', error);
-      });
+    // await dispatch(addTodo(arg))
+    //   .then(() => {
+    //     form.resetFields();
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error adding todo:', error);
+    //   });
+
+    try {
+      // await dispatch(addTodo(arg));
+      await dispatch(addTodo(arg)).unwrap();
+      form.resetFields();
+    } catch (error) {
+      console.error('Error adding todo:', error);
+    }
   };
 
   const onFinishFailed = (e: ValidateErrorEntity) => {
