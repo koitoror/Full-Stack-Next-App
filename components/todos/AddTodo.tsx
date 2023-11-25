@@ -8,6 +8,7 @@ import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
 import { AsyncThunkArgAddTodo } from './types';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { AppDispatch } from '../../store'; // Import AppDispatch type from your store
 
 
 type FinishHandler = (values: {
@@ -16,7 +17,7 @@ type FinishHandler = (values: {
 
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
