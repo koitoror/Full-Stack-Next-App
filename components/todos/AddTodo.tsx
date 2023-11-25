@@ -26,13 +26,14 @@ const AddTodo: React.FC = () => {
       callbackFail,
     };
 
-    // Dispatch the async thunk action creator
-    try {
-      await dispatch(addTodo(arg));
-      form.resetFields();
-    } catch (error) {
-      console.error('Error adding todo:', error);
-    }
+    // Call the async thunk directly, it returns a promise
+    addTodo(arg)(dispatch)
+      .then(() => {
+        form.resetFields();
+      })
+      .catch((error) => {
+        console.error('Error adding todo:', error);
+      });
   };
 
   const onFinishFailed = (e: ValidateErrorEntity) => {
