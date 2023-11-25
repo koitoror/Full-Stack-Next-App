@@ -18,7 +18,7 @@ const AddTodo: React.FC = () => {
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
-  const onFinish: FinishHandler = ({ text }) => {
+  const onFinish: FinishHandler = async ({ text }) => {
     let callbackFail: (message: string) => void;
     callbackFail = (errorMessage) => message.error(errorMessage);
     const arg: AsyncThunkArgAddTodo = {
@@ -28,7 +28,7 @@ const AddTodo: React.FC = () => {
     };
 
     // Dispatch the async thunk action creator
-    dispatch(addTodo(arg))
+    await dispatch(addTodo(arg))
       .then(() => {
         form.resetFields();
       })
