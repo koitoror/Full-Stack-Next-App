@@ -5,10 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateTodo, removeTodo } from '../../store/slices/todoSlice';
 import { Todo } from './types';
 import { RootState } from '../../store';
+import { AppDispatch } from '../../store'; // Import AppDispatch type from your store
 
 const TodoList: React.FC = () => {
   const todos = useSelector((state: RootState) => state.todos.todos);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const columns: ColumnsType<Todo> = [
     {
