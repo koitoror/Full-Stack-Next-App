@@ -1,16 +1,11 @@
+// AddTodo.tsx
 import React from 'react';
 import styles from '../../styles/AddTodo.module.less';
 import { Form, Input, Button, Spin, message } from 'antd';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../../store/slices/todoSlice';
+import { addTodo, AsyncThunkArgAddTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
-
-type AsyncThunkArgAddTodo = {
-  text: string;
-  callbackSuccess: () => void;
-  callbackFail: (message: string) => void;
-};
 
 type FinishHandler = (values: {
   text: string;
@@ -22,7 +17,7 @@ const AddTodo: React.FC = () => {
 
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
-  const onFinish: FinishHandler = async ({ text }) => {
+  const onFinish: FinishHandler = ({ text }) => {
     let callbackFail: (message: string) => void;
     callbackFail = (errorMessage) => message.error(errorMessage);
     const arg: AsyncThunkArgAddTodo = {
@@ -31,8 +26,8 @@ const AddTodo: React.FC = () => {
       callbackFail,
     };
 
+    // Dispatch the async thunk action creator
     try {
-      // Dispatch a regular thunk action
       await dispatch(addTodo(arg));
       form.resetFields();
     } catch (error) {
@@ -60,7 +55,27 @@ const AddTodo: React.FC = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        {/* Form items go here */}
+        <Form.Item
+          label="Text"
+          name="text"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your task!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ sm: { offset: 6, span: 18 } }}>
+          <Button type="primary" htmlType="submit" className={styles.submit}>
+            Submit
+          </Button>
+          <Button onClick={onReset} className={styles.reset}>
+            Reset
+          </Button>
+        </Form.Item>
       </Form>
     );
   }
