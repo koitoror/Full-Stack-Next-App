@@ -30,19 +30,20 @@ const AddTodo: React.FC = () => {
       },
     };
 
-    // Dispatch the async thunk action creator
-    // await dispatch(addTodo(arg))
-    //   .then(() => {
-    //     form.resetFields();
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error adding todo:', error);
-    //   });
-
     try {
       // await dispatch(addTodo(arg));
-      await dispatch(addTodo(arg)).unwrap();
-      form.resetFields();
+      // await dispatch(addTodo(arg)).unwrap();
+      // form.resetFields();
+
+      const resultAction = await dispatch(addTodo(arg));
+
+      if (addTodo.fulfilled.match(resultAction)) {
+        // Handle successful fulfillment
+        form.resetFields();
+      } else {
+        // Handle other states (rejected, pending, etc.) if needed
+      }
+    
     } catch (error) {
       console.error('Error adding todo:', error);
     }
