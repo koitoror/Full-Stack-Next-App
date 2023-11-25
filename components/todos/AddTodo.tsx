@@ -4,8 +4,9 @@ import styles from '../../styles/AddTodo.module.less';
 import { Form, Input, Button, Spin, message } from 'antd';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, AsyncThunkArgAddTodo } from '../../store/slices/todoSlice';
+import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
+import { AsyncThunkArgAddTodo } from './types';
 
 type FinishHandler = (values: {
   text: string;
