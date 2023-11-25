@@ -11,7 +11,6 @@ type FinishHandler = (values: { text: string }) => void;
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
   const onFinish: FinishHandler = async ({ text }) => {
@@ -23,8 +22,8 @@ const AddTodo: React.FC = () => {
         callbackSuccess: () => message.info('Task was successfully added!'),
         callbackFail,
       };
-      // Dispatch the async thunk action creator
-      await dispatch(addTodo(arg));
+      // Call the async thunk directly, it returns a promise
+      await addTodo(arg)(dispatch);
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
@@ -51,7 +50,27 @@ const AddTodo: React.FC = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        {/* ... rest of the component ... */}
+        <Form.Item
+          label="Text"
+          name="text"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your task!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ sm: { offset: 6, span: 18 } }}>
+          <Button type="primary" htmlType="submit" className={styles.submit}>
+            Submit
+          </Button>
+          <Button onClick={onReset} className={styles.reset}>
+            Reset
+          </Button>
+        </Form.Item>
       </Form>
     );
   }
