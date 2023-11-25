@@ -77,7 +77,13 @@ const handler = async (
   await runMiddleware(req, res, cors);
 
   if (req.method === 'PATCH') {
-    const id = req.query.id as string;
+    const id = req.query.id as string | undefined;
+    // Handle the case where id is undefined
+    if (!id) {
+      res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
+      return;
+    }
+    
     const fieldsToUpdate: Partial<Todo> = {
       completed: !!req.body.completed
     };
@@ -86,7 +92,11 @@ const handler = async (
   }
 
   if (req.method === 'DELETE') {
-    const id = req.query.id as string;
+    const id = req.query.id as string | undefined;
+    if (!id) {
+      res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
+      return;
+    }
     const result = await removeTodo(id);
     res.status(result.status).json(result);
   }
