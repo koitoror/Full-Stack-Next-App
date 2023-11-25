@@ -1,5 +1,8 @@
 import Cors from 'cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
+// Import the necessary types from Firebase
+import type { DocumentData, CollectionReference } from 'firebase/firestore/lite';
+
 import {
   collection,
   doc,
@@ -11,6 +14,8 @@ import { db } from '../../../firebase';
 import type { Todo } from '../../../components/todos/types';
 import { StatusCode } from '../statusCodes';
 import { runMiddleware } from '../middleware';
+
+
 
 export type UpdateTodoResult = {
   id?: string;
@@ -27,7 +32,7 @@ export type RemoveTodoResult = {
 
 type Response = UpdateTodoResult | RemoveTodoResult;
 
-const collectionName = process.env.FIREBASE_TODOS_COLLECTION;
+const collectionName: string = process.env.FIREBASE_TODOS_COLLECTION;
 
 const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<UpdateTodoResult> => {
   try {
@@ -35,7 +40,12 @@ const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<Up
       throw new Error('ID is missing');
     }
 
-    const docRef = doc(collection(db, collectionName), id);
+    // Ensure that `collectionName` is a string
+    if (typeof collectionName !== 'string') {
+      throw new Error('Invalid collectionName');
+    }
+
+    const docRef: DocumentReference<DocumentData> = doc(collection(db, collectionName), id);
     await updateDoc(docRef, fieldsToUpdate);
     return { id, updatedFields: fieldsToUpdate, status: StatusCode.OK };
   } catch (error) {
