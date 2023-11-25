@@ -7,6 +7,8 @@ import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
 import { createAsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';  // Add import for AsyncThunkAction
 import { AsyncThunkArgAddTodo } from './types';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 type FinishHandler = (
   values: {
@@ -15,7 +17,10 @@ type FinishHandler = (
 ) => void;
 
 // Create an async thunk type
-type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
+// type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
+// type ThunkResult<R> = AsyncThunkAction<R, RootState, undefined, AnyAction>;
+type ThunkResult<R> = ThunkAction<R, RootState, undefined, AnyAction>;
+
 
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
@@ -37,6 +42,7 @@ const AddTodo: React.FC = () => {
     // Dispatch the async thunk action creator
     try {
       await (dispatch as ThunkResult<Todo>)(addTodo(arg));
+      
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
