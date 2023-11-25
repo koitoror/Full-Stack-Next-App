@@ -37,7 +37,8 @@ const TodoList: React.FC = () => {
         let callbackFail: (message: string) => void;
         callbackFail = (errorMessage) => message.error(errorMessage);
         const arg = {
-          id,
+          // id,
+          id: id ?? '', // Use an empty string as a default value if id is undefined
           completed: !completed,
           callbackSuccess: () => message.info('Task was successfully updated!'),
           callbackFail
