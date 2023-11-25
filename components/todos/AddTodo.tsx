@@ -5,12 +5,19 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../store/slices/todoSlice';
 import { RootState } from '../../store';
+import { AsyncThunkAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-type FinishHandler = (values: { text: string }) => void;
+type FinishHandler = (values: {
+  text: string;
+}) => void;
+
+// Create an async thunk type
+type ThunkResult<R> = AsyncThunkAction<R, AsyncThunkArgAddTodo, {}>;
 
 const AddTodo: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+
   const isLoading = useSelector((state: RootState) => state.todos.isLoading);
 
   const onFinish: FinishHandler = async ({ text }) => {
@@ -22,8 +29,8 @@ const AddTodo: React.FC = () => {
         callbackSuccess: () => message.info('Task was successfully added!'),
         callbackFail,
       };
-      // Call the async thunk directly, it returns a promise
-      await addTodo(arg)(dispatch);
+      // Dispatch the async thunk action creator
+      await dispatch(addTodo(arg));
       form.resetFields();
     } catch (error) {
       console.error('Error adding todo:', error);
