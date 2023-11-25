@@ -27,8 +27,8 @@ const AddTodo: React.FC = () => {
       callbackFail,
     };
 
-    // Call the async thunk directly, it returns a promise
-    addTodo(arg)(dispatch)
+    // Dispatch the async thunk action creator
+    dispatch(addTodo(arg))
       .then(() => {
         form.resetFields();
       })
