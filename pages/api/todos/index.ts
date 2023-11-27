@@ -58,18 +58,28 @@ const addTodo = async (todo: Todo): Promise<AddTodoResult> => {
     if (!collectionName) {
       throw new Error('Collection name is not defined');
     }
+    
     const docRef = await addDoc(collection(db, collectionName), todo);
     const modifyTodo = { id: docRef.id, ...todo };
+
     return { todo: modifyTodo, status: StatusCode.CREATED };
   } catch (_error) {
-    const error: FirestoreError = _error;
-    let status = StatusCode.BAD_REQUEST;
-    if (error.code === 'permission-denied') {
-      status = StatusCode.UNAUTHORIZED;
+    if (_error instanceof FirestoreError) {
+      const error: FirestoreError = _error;
+      let status = StatusCode.BAD_REQUEST;
+
+      if (error.code === 'permission-denied') {
+        status = StatusCode.UNAUTHORIZED;
+      }
+
+      return { error, status };
+    } else {
+      // If it's not a FirestoreError, handle it or rethrow
+      throw _error;
     }
-    return { error, status };
   }
 };
+
 
 const handler = async (
   req: NextApiRequest,
