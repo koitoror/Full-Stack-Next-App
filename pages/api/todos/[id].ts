@@ -128,7 +128,11 @@ const handler = async (
     const id = req.query.id as string | undefined;
     // Handle the case where id is undefined
     if (!id) {
-      res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
+      // res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
+      res.status(400).json({
+        error: new CustomError('Missing id parameter'),
+        status: StatusCode.BAD_REQUEST,
+      });
       return;
     }
     
@@ -142,7 +146,11 @@ const handler = async (
   if (req.method === 'DELETE') {
     const id = req.query.id as string | undefined;
     if (!id) {
-      res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
+      // res.status(400).json({ error: 'Missing id parameter', status: StatusCode.BAD_REQUEST });
+      res.status(400).json({
+        error: new CustomError('Missing id parameter'),
+        status: StatusCode.BAD_REQUEST,
+      });
       return;
     }
     const result = await removeTodo(id);
