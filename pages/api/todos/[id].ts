@@ -51,7 +51,9 @@ const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<Up
   } catch (error) {
     let status = StatusCode.BAD_REQUEST;
 
-    if (error instanceof Error) {
+    // if (error instanceof Error) {
+    if (error instanceof CustomError) {
+
       const firestoreError = error as FirestoreError | undefined;
 
       if (firestoreError && firestoreError.code === 'permission-denied') {
@@ -61,7 +63,9 @@ const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<Up
       return { error: firestoreError, status };
     }
     // Handle other types of errors or unknown errors here
-    return { error: new Error('Unknown error'), status };
+    // return { error: new Error('Unknown error'), status };
+    return { error: new CustomError('Unknown error'), status };
+
   }
 };
 
@@ -82,6 +86,17 @@ const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
     }
     return { error: firestoreError, status };
   }
+}
+
+class CustomError extends Error {
+  constructor(message?: string) {
+    super(message);
+    // Set the prototype explicitly
+    Object.setPrototypeOf(this, CustomError.prototype);
+  }
+
+  // Add any additional properties needed, in this case, 'code'
+  code?: string;
 }
 
 const handler = async (
