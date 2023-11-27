@@ -21,14 +21,22 @@ const register = async (email: string, password: string): Promise<RegisterResult
     const response = await createUserWithEmailAndPassword(auth, email, password);
     return { user: response.user, status: StatusCode.OK };
   } catch (_error) {
-    const error: AuthError = _error;
-    let status = StatusCode.BAD_REQUEST;
-    if (error.code === 'auth/email-already-in-use') {
-      status = StatusCode.CONFLICT;
+    if (_error instanceof AuthError) {
+      const error: AuthError = _error;
+      let status = StatusCode.BAD_REQUEST;
+
+      if (error.code === 'auth/email-already-in-use') {
+        status = StatusCode.CONFLICT;
+      }
+
+      return { error, status };
+    } else {
+      // If it's not an AuthError, handle it or rethrow
+      throw _error;
     }
-    return { error, status };
   }
 };
+
 
 const handler = async (
   req: NextApiRequest,
