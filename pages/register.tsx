@@ -3,23 +3,21 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
-import { Row, Col, Form, Input, Button, Spin, message } from 'antd';
+import { Row, Col, Form, Input, Button, Spin, message, MessageType } from 'antd'; // Ensure you import MessageType
 import { setCurrent as setCurrentMenuItem } from '../store/slices/menuSlice';
 import { registerUser } from '../store/slices/userSlice';
-import { RootState } from '../store';
+import { RootState, AppDispatch } from '../store';
 import styles from '../styles/Register.module.less';
 
-type FinishHandler = (
-  values: {
-    email: string,
-    password1: string,
-    password2: string,
-  }
-) => void;
+type FinishHandler = {
+  email: string;
+  password1: string;
+  password2: string;
+};
 
 const Register: React.FC = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(setCurrentMenuItem({ current: 'register' }));
@@ -38,12 +36,13 @@ const Register: React.FC = () => {
           router.push('/');
         }, 2000);
       },
-      callbackFail: (errorMessage) => message.error(errorMessage)
+      // Explicitly type the errorMessage parameter
+      callbackFail: (errorMessage: MessageType) => message.error(errorMessage),
     };
     dispatch(registerUser(arg));
   };
 
-  const onFinish: FinishHandler = ({ email, password1, password2 }) => {
+  const onFinish: (values: FinishHandler) => void = ({ email, password1, password2 }) => {
     if (password1 !== password2) {
       message.error('Passwords are not equal!');
       return;
@@ -78,42 +77,41 @@ const Register: React.FC = () => {
           sm={{ span: 16, offset: 4 }}
           xs={{ span: 20, offset: 2 }}
         >
-          { isLoading 
-            ? <Spin size="large" className={styles.spin} /> 
-            : (
-                <Form
-                  className={styles.form}
-                  name="register"
-                  labelCol={{sm: { span: 8 }}}
-                  wrapperCol={{sm: { span: 16 }}}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  autoComplete="off"
-                >
-                  <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your email!' }]}
-                  >
-                    <Input />
-                  </Form.Item>
-      
-                  <Form.Item label="Password" name="password1" rules={password1Rules}>
-                    <Input.Password />
-                  </Form.Item>
-      
-                  <Form.Item label="Password again" name="password2" rules={password2Rules}>
-                    <Input.Password />
-                  </Form.Item>
-      
-                  <Form.Item wrapperCol={{sm: { offset: 8, span: 16 }}}>
-                    <Button type="primary" htmlType="submit" className={styles.button}>
-                      Register
-                    </Button>
-                  </Form.Item>
-                </Form>
-              )
-          }        
+          {isLoading ? (
+            <Spin size="large" className={styles.spin} />
+          ) : (
+            <Form
+              className={styles.form}
+              name="register"
+              labelCol={{ sm: { span: 8 } }}
+              wrapperCol={{ sm: { span: 16 } }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[{ required: true, message: 'Please input your email!' }]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item label="Password" name="password1" rules={password1Rules}>
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item label="Password again" name="password2" rules={password2Rules}>
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item wrapperCol={{ sm: { offset: 8, span: 16 } }}>
+                <Button type="primary" htmlType="submit" className={styles.button}>
+                  Register
+                </Button>
+              </Form.Item>
+            </Form>
+          )}
         </Col>
       </Row>
     </>
