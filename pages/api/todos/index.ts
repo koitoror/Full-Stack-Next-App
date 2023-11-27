@@ -56,8 +56,8 @@ const getTodos = async (): Promise<GetTodosResult> => {
 const addTodo = async (todo: Todo): Promise<AddTodoResult> => {
   try {
     // const docRef = await addDoc(collection(db, collectionName), todo);
-    const docRef = await addDoc(collection(db as Firestore, collectionName) as CollectionReference<DocumentData, DocumentData>, todo);
-    // const docRef = await addDoc(collection(db as Firestore, collectionName), todo);
+    // const docRef = await addDoc(collection(db as Firestore, collectionName) as CollectionReference<DocumentData, DocumentData>, todo);
+    const docRef = await addDoc(collection(db as Firestore, collectionName), todo);
 
 
     const modifyTodo = { id: docRef.id, ...todo };
