@@ -73,7 +73,9 @@ const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
   try {
     if (!id) {
       // throw new Error('ID is missing');
-      throw new CustomError('ID is missing', 'invalid-id');
+      // throw new CustomError('ID is missing', 'invalid-id');
+      throw new Error('ID is missing');
+
     }
 
     const docRef = doc(collection(db, collectionName), id);
