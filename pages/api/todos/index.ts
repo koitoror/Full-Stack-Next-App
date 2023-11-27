@@ -42,7 +42,7 @@ const getTodos = async (): Promise<GetTodosResult> => {
     });
     return { todos, status: StatusCode.OK };
   } catch (error) {
-    const error: FirestoreError = _error;
+    // const error: FirestoreError = _error;
     const status = StatusCode.BAD_REQUEST;
     return { error, status };
   }
