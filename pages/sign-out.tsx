@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrent as setCurrentMenuItem } from '../store/slices/menuSlice';
 import { signOut } from '../store/slices/userSlice';
-import { RootState } from '../store';
+import { RootState, AppDispatch } from '../store';
 import styles from '../styles/SignOut.module.less';
 
 const SignOut: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   
   useEffect(() => {
