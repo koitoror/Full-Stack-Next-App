@@ -37,7 +37,9 @@ type AsyncThunkArgSignOut = {
 };
 
 const getErrorMessageByStatusCode = (status: StatusCode): string => {
-  let message;
+  // let message;
+  let message = 'An unexpected error occurred'; // Default value
+
 
   switch (status) {
     case StatusCode.BAD_REQUEST:
@@ -54,7 +56,9 @@ const getErrorMessageByStatusCode = (status: StatusCode): string => {
       break;
   }
 
-  return message;
+  // return message;
+  return message || ''; // Ensure the result is always a string
+
 };
 
 const API_HOST = process.env.API_HOST;
