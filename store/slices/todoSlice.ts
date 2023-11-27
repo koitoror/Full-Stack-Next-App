@@ -171,9 +171,10 @@ export const addTodo = createAsyncThunk<Todo, AsyncThunkArgAddTodo>(
 // Export the reducer
 // export default todoSlice.reducer;
 
-export const updateTodo = createAsyncThunk
-<AsyncThunkReturnTypeUpdateTodo, AsyncThunkArgUpdateTodo>
-(
+export const updateTodo = createAsyncThunk<
+  { id: string; updatedFields: Partial<Todo> },
+  AsyncThunkArgUpdateTodo
+>(
   'todos/updateTodo',
   async (arg, { rejectWithValue }) => {
     try {
