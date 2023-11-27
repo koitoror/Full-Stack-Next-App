@@ -42,6 +42,7 @@ const signIn = async (email: string, password: string): Promise<SignInResult> =>
         throw _error;
       }
     }
+  };
 };
 
 const handler = async (
