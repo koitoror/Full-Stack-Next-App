@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
-import { Row, Col, Form, Input, Button, Spin, message, MessageType } from 'antd'; // Ensure you import MessageType
+import { Row, Col, Form, Input, Button, Spin, message } from 'antd'; // Ensure you import MessageType
 import { setCurrent as setCurrentMenuItem } from '../store/slices/menuSlice';
 import { registerUser } from '../store/slices/userSlice';
 import { RootState, AppDispatch } from '../store';
