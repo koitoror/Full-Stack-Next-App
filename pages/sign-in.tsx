@@ -7,7 +7,7 @@ import { Row, Col, Form, Input, Checkbox, Button, Spin, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { setCurrent as setCurrentMenuItem } from '../store/slices/menuSlice';
 import { signIn as signInAction } from '../store/slices/userSlice';
-import { RootState } from '../store';
+import { RootState, AppDispatch } from '../store';
 import styles from '../styles/SignIn.module.less';
 
 type FinishHandler = (
@@ -20,7 +20,7 @@ type FinishHandler = (
 
 const SignIn: React.FC = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(setCurrentMenuItem({ current: 'sign-in' }));
