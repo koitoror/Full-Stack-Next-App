@@ -185,7 +185,7 @@ export const updateTodo = createAsyncThunk<
         body: JSON.stringify(dataToSerialize)
       });
       const data: UpdateTodoResult = await response.json();
-      if (data.updatedFields) {
+      if (data.id) {
         arg.callbackSuccess();
         return { id: data.id, updatedFields: data.updatedFields };
       } else {
@@ -198,6 +198,7 @@ export const updateTodo = createAsyncThunk<
     }
   }
 );
+
 
 export const removeTodo = createAsyncThunk<string, AsyncThunkArgRemoveTodo>(
   'todos/removeTodo',
