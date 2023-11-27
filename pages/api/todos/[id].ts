@@ -48,10 +48,10 @@ const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<Up
     const docRef: DocumentReference<DocumentData> = doc(collection(db, collectionName), id);
     await updateDoc(docRef, fieldsToUpdate);
     return { id, updatedFields: fieldsToUpdate, status: StatusCode.OK };
-  } catch (error) {
+  } catch (error: any) {
     const firestoreError: FirestoreError = error;
     let status = StatusCode.BAD_REQUEST;
-    if (firestoreError.code === 'permission-denied') {
+    if (firestoreError && firestoreError.code === 'permission-denied') {
       status = StatusCode.UNAUTHORIZED;
     }
     return { error: firestoreError, status };
