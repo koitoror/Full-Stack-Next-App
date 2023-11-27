@@ -72,21 +72,31 @@ const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<Up
 const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
   try {
     if (!id) {
-      throw new Error('ID is missing');
+      // throw new Error('ID is missing');
+      throw new CustomError('ID is missing', 'invalid-id');
     }
 
     const docRef = doc(collection(db, collectionName), id);
     await deleteDoc(docRef);
     return { id, status: StatusCode.OK };
   } catch (error) {
-    const firestoreError: FirestoreError = error;
     let status = StatusCode.BAD_REQUEST;
-    if (firestoreError.code === 'permission-denied') {
-      status = StatusCode.UNAUTHORIZED;
+
+    if (error instanceof CustomError) {
+      const firestoreError: FirestoreError = error;
+
+      if (firestoreError.code === 'permission-denied') {
+        status = StatusCode.UNAUTHORIZED;
+      }
+
+      return { error: firestoreError, status };
     }
-    return { error: firestoreError, status };
+
+    // Handle other types of errors or unknown errors here
+    return { error: new CustomError('Unknown error'), status };
   }
-}
+};
+
 
 class CustomError extends Error {
   // Set a default value for code
