@@ -39,7 +39,7 @@ const SignIn: React.FC = () => {
           router.push('/');
         }, 2000);
       },
-      callbackFail: (errorMessage) => message.error(errorMessage)
+      callbackFail: (errorMessage: string) => message.error(errorMessage),
     };
     dispatch(signInAction(arg));
   };
