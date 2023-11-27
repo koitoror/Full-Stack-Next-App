@@ -102,7 +102,7 @@ export const addTodo = createAsyncThunk<Todo, AsyncThunkArgAddTodo>(
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
       }
-    } catch (error) {
+    } catch (error: any) {
       arg.callbackFail(error.message);
       return rejectWithValue(error.message);
     }
@@ -191,7 +191,7 @@ export const updateTodo = createAsyncThunk
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
       }
-    } catch (error) {
+    } catch (error: any) {
       arg.callbackFail(error.message);
       return rejectWithValue(error.message);
     }
@@ -214,7 +214,7 @@ export const removeTodo = createAsyncThunk<string, AsyncThunkArgRemoveTodo>(
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
       }
-    } catch (error) {
+    } catch (error: any) {
       arg.callbackFail(error.message);
       return rejectWithValue(error.message);
     }
