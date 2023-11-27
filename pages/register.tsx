@@ -37,7 +37,9 @@ const Register: React.FC = () => {
         }, 2000);
       },
       // Explicitly type the errorMessage parameter
-      callbackFail: (errorMessage: MessageType) => message.error(errorMessage),
+      // callbackFail: (errorMessage: MessageType) => message.error(errorMessage),
+      callbackFail: (errorMessage: string) => message.error(errorMessage),
+
     };
     dispatch(registerUser(arg));
   };
