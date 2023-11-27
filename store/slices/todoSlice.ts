@@ -45,7 +45,9 @@ const initialState: TodoState = {
 };
 
 const getErrorMessageByStatusCode = (status: StatusCode): string => {
-  let message;
+  // let message;
+  let message = 'An unexpected error occurred'; // Default value
+
 
   switch (status) {
     case StatusCode.BAD_REQUEST:
