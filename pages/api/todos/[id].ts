@@ -89,12 +89,14 @@ const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
 }
 
 class CustomError extends Error {
-  // Use FirestoreErrorCode as the type for code
-  code?: FirestoreErrorCode;
+  // Set a default value for code
+  code: FirestoreErrorCode = 'unknown';
 
-  constructor(message?: string, code: FirestoreErrorCode = 'unknown') {
+  constructor(message?: string, code?: FirestoreErrorCode) {
     super(message);
-    this.code = code;
+    if (code) {
+      this.code = code;
+    }
 
     // Set the prototype explicitly
     Object.setPrototypeOf(this, CustomError.prototype);
