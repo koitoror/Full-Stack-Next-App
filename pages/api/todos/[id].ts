@@ -89,10 +89,10 @@ const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
 }
 
 class CustomError extends Error {
-  // Add a custom code property
+  // Use FirestoreErrorCode as the type for code
   code?: FirestoreErrorCode;
 
-  constructor(message?: string, code?: FirestoreErrorCode) {
+  constructor(message?: string, code: FirestoreErrorCode = 'unknown') {
     super(message);
     this.code = code;
 
