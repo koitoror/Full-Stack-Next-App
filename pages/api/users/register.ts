@@ -4,7 +4,8 @@ import {
   AuthError,
   User,
   getAuth,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  FirebaseAuthError
 } from 'firebase/auth';
 import { StatusCode } from '../statusCodes';
 import { runMiddleware } from '../middleware';
@@ -22,7 +23,7 @@ const register = async (email: string, password: string): Promise<RegisterResult
     return { user: response.user, status: StatusCode.OK };
   } catch (_error) {
     // Use a type assertion to tell TypeScript about the type of _error
-    const error = _error as { code?: string };
+    const error = _error as FirebaseAuthError;
 
     // Check the structure of the error object
     if (error && typeof error.code === 'string') {
@@ -39,6 +40,7 @@ const register = async (email: string, password: string): Promise<RegisterResult
     }
   }
 };
+
 
 
 
