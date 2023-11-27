@@ -75,12 +75,14 @@ export const getTodos = createAsyncThunk<Array<Todo>, AsyncThunkArgGetTodos>(
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
       }
-    } catch (error) {
+    } catch (error: any) {
+      // Explicitly type 'error' to 'Error'
       arg.callbackFail(error.message);
       return rejectWithValue(error.message);
     }
   }
 );
+
 
 export const addTodo = createAsyncThunk<Todo, AsyncThunkArgAddTodo>(
   'todos/addTodo',
