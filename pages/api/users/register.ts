@@ -42,9 +42,6 @@ const register = async (email: string, password: string): Promise<RegisterResult
 };
 
 
-
-
-
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<RegisterResult>
