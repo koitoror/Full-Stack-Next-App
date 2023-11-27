@@ -1,7 +1,7 @@
 import Cors from 'cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 // Import the necessary types from Firebase
-import type { DocumentData, CollectionReference } from 'firebase/firestore/lite';
+import type { DocumentData, CollectionReference, DocumentReference } from 'firebase/firestore/lite';
 
 import {
   collection,
@@ -32,7 +32,7 @@ export type RemoveTodoResult = {
 
 type Response = UpdateTodoResult | RemoveTodoResult;
 
-const collectionName: string = process.env.FIREBASE_TODOS_COLLECTION;
+const collectionName: string = process.env.FIREBASE_TODOS_COLLECTION || '';
 
 const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<UpdateTodoResult> => {
   try {
