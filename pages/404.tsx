@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Row, Col, Alert } from 'antd';
 import { useDispatch } from 'react-redux';
 import { setCurrent as setCurrentMenuItem } from '../store/slices/menuSlice';
+// import { AppDispatch } from '../store';
 
 type EffectCallbackReturnType = () => any;
 
