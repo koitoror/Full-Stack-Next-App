@@ -34,19 +34,21 @@ const getTodos = async (): Promise<GetTodosResult> => {
     }
 
     const querySnapshot = await getDocs(collection(db, collectionName));
-    const todos = [];
+    const todos: Todo[] = [];
+
     querySnapshot.forEach(doc => {
-      const todo = doc.data();
-      todo.id = doc.id;
+      const todoData = doc.data() as Todo;
+      const todo: Todo = { id: doc.id, ...todoData };
       todos.push(todo);
     });
+
     return { todos, status: StatusCode.OK };
   } catch (error) {
-    // const error: FirestoreError = _error;
     const status = StatusCode.BAD_REQUEST;
     return { error, status };
   }
 };
+
 
 const addTodo = async (todo: Todo): Promise<AddTodoResult> => {
   try {
