@@ -43,9 +43,10 @@ const signIn = async (email: string, password: string): Promise<SignInResult> =>
     }
   }
 
-  // Add a default return statement
-  return { error: { message: 'Unexpected error' }, status: StatusCode.INTERNAL_SERVER_ERROR };
+  // This line is now reachable because of the throw statement above.
+  throw new Error('Unexpected error occurred.');
 };
+
 
 
 const handler = async (
