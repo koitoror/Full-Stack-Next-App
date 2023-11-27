@@ -19,7 +19,7 @@ const signOut = async (): Promise<SignOutResult> => {
     await signOutFirebase(auth);
     return { status: StatusCode.OK };
   } catch (_error) {
-    const error: AuthError = _error;
+    const error: AuthError = _error as AuthError; // Type assertion
     let status = StatusCode.BAD_REQUEST;
     return { error, status };
   }
