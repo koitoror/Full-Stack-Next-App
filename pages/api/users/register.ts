@@ -21,7 +21,8 @@ const register = async (email: string, password: string): Promise<RegisterResult
     const response = await createUserWithEmailAndPassword(auth, email, password);
     return { user: response.user, status: StatusCode.OK };
   } catch (_error) {
-    if (_error instanceof AuthError) {
+    // Check the structure of the error object
+    if ('code' in _error && typeof _error.code === 'string') {
       const error: AuthError = _error;
       let status = StatusCode.BAD_REQUEST;
 
@@ -31,11 +32,12 @@ const register = async (email: string, password: string): Promise<RegisterResult
 
       return { error, status };
     } else {
-      // If it's not an AuthError, handle it or rethrow
+      // If it doesn't match the expected structure, handle it or rethrow
       throw _error;
     }
   }
 };
+
 
 
 const handler = async (
