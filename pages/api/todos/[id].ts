@@ -52,9 +52,9 @@ const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<Up
     let status = StatusCode.BAD_REQUEST;
 
     if (error instanceof Error) {
-      const firestoreError: FirestoreError = error;
+      const firestoreError = error as FirestoreError | undefined;
 
-      if (firestoreError.code === 'permission-denied') {
+      if (firestoreError && firestoreError.code === 'permission-denied') {
         status = StatusCode.UNAUTHORIZED;
       }
 
