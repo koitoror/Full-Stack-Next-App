@@ -10,6 +10,8 @@ import { db } from '../../../firebase';
 import type { Todo } from '../../../components/todos/types';
 import { StatusCode } from '../statusCodes';
 import { runMiddleware } from '../middleware';
+import type { DocumentData, CollectionReference, DocumentReference, FirestoreErrorCode } from 'firebase/firestore/lite';
+
 
 export type GetTodosResult = {
   todos?: Todo[];
@@ -53,7 +55,9 @@ const getTodos = async (): Promise<GetTodosResult> => {
 
 const addTodo = async (todo: Todo): Promise<AddTodoResult> => {
   try {
-    const docRef = await addDoc(collection(db, collectionName), todo);
+    // const docRef = await addDoc(collection(db, collectionName), todo);
+    const docRef = await addDoc(collection(db, collectionName) as CollectionReference<DocumentData, DocumentData>, todo);
+
     const modifyTodo = { id: docRef.id, ...todo };
     return { todo: modifyTodo, status: StatusCode.CREATED };
   } catch (_error) {
