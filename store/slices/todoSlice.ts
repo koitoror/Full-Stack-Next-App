@@ -173,7 +173,8 @@ export const addTodo = createAsyncThunk<Todo, AsyncThunkArgAddTodo>(
 
 export const updateTodo = createAsyncThunk<
   { id: string; updatedFields: Partial<Todo> },
-  AsyncThunkArgUpdateTodo
+  AsyncThunkArgUpdateTodo,
+  { rejectValue: string }
 >(
   'todos/updateTodo',
   async (arg, { rejectWithValue }) => {
@@ -185,9 +186,11 @@ export const updateTodo = createAsyncThunk<
         body: JSON.stringify(dataToSerialize)
       });
       const data: UpdateTodoResult = await response.json();
+
       if (data.id) {
+        // Only proceed if 'id' is truthy
         arg.callbackSuccess();
-        return { id: data.id, updatedFields: data.updatedFields };
+        return { id: data.id, updatedFields: data.updatedFields || {} };
       } else {
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
