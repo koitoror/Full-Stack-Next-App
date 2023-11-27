@@ -24,8 +24,8 @@ export const renderWithRedux = (
     ...renderOptions
   }: Config = {}
 ) => {
-  const Wrapper = ({ children }) => (
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <Provider store={store}>{children}</Provider>
   );
-  return render(component, { wrapper: Wrapper, ...renderOptions })
+  return render(component, { wrapper: Wrapper, ...renderOptions });
 };
