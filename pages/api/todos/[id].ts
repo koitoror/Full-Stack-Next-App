@@ -102,9 +102,9 @@ class CustomError extends Error {
   // Set a default value for code
   code?: FirestoreErrorCode = 'unknown';
 
-  constructor(message?: string, code?: FirestoreErrorCode) {
+  constructor(message?: string, code?: FirestoreErrorCode | undefined) {
     super(message);
-    if (code) {
+    if (code !== undefined) {
       this.code = code;
     }
 
