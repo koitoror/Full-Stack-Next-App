@@ -15,22 +15,33 @@ export type SignInResult = {
   status: StatusCode;
 };
 
+const isAuthError = (error: any): error is AuthError => {
+  return error?.code !== undefined && typeof error.code === 'string';
+};
+
 const signIn = async (email: string, password: string): Promise<SignInResult> => {
   try {
     const auth = getAuth();
     const response = await signInWithEmailAndPassword(auth, email, password);
     return { user: response.user, status: StatusCode.OK };
   } catch (_error) {
-    const error: AuthError = _error;
-    let status = StatusCode.BAD_REQUEST;
-    if (error.code === 'auth/user-not-found') {
-      status = StatusCode.NOT_FOUND;
+
+      if (isAuthError(_error)) {
+        const error: AuthError = _error;
+        let status = StatusCode.BAD_REQUEST;
+
+        if (error.code === 'auth/user-not-found') {
+          status = StatusCode.NOT_FOUND;
+        }
+        if (error.code === 'auth/wrong-password') {
+          status = StatusCode.FORBIDDEN;
+
+        return { error, status };
+      } else {
+        // If it doesn't match the expected structure, handle it or rethrow
+        throw _error;
+      }
     }
-    if (error.code === 'auth/wrong-password') {
-      status = StatusCode.FORBIDDEN;
-    }
-    return { error, status };
-  }
 };
 
 const handler = async (
