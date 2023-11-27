@@ -21,9 +21,11 @@ const register = async (email: string, password: string): Promise<RegisterResult
     const response = await createUserWithEmailAndPassword(auth, email, password);
     return { user: response.user, status: StatusCode.OK };
   } catch (_error) {
+    // Use a type assertion to tell TypeScript about the type of _error
+    const error = _error as { code?: string };
+
     // Check the structure of the error object
-    if ('code' in _error && typeof _error.code === 'string') {
-      const error: AuthError = _error;
+    if (error && typeof error.code === 'string') {
       let status = StatusCode.BAD_REQUEST;
 
       if (error.code === 'auth/email-already-in-use') {
@@ -37,6 +39,7 @@ const register = async (email: string, password: string): Promise<RegisterResult
     }
   }
 };
+
 
 
 
