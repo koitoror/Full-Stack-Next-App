@@ -16,17 +16,18 @@ export type RegisterResult = {
   status: StatusCode;
 };
 
+const isAuthError = (error: any): error is AuthError => {
+  return error?.code !== undefined && typeof error.code === 'string';
+};
+
 const register = async (email: string, password: string): Promise<RegisterResult> => {
   try {
     const auth = getAuth();
     const response = await createUserWithEmailAndPassword(auth, email, password);
     return { user: response.user, status: StatusCode.OK };
   } catch (_error) {
-    // Use a type assertion to tell TypeScript about the type of _error
-    const error = _error as FirebaseAuthError;
-
-    // Check the structure of the error object
-    if (error && typeof error.code === 'string') {
+    if (isAuthError(_error)) {
+      const error: AuthError = _error;
       let status = StatusCode.BAD_REQUEST;
 
       if (error.code === 'auth/email-already-in-use') {
