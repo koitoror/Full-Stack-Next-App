@@ -43,9 +43,10 @@ const getTodos = async (): Promise<GetTodosResult> => {
     });
 
     return { todos, status: StatusCode.OK };
-  } catch (error) {
+  } catch (error: any) {
+    const firestoreError: FirestoreError = error;
     const status = StatusCode.BAD_REQUEST;
-    return { error, status };
+    return { error: firestoreError, status };
   }
 };
 
