@@ -81,7 +81,7 @@ export const registerUser = createAsyncThunk<User, AsyncThunkArgRegisterUser>(
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
       }
-    } catch (error): any {
+    } catch (error: any) {
       arg.callbackFail(error.message);
       return rejectWithValue(error.message);
     }
@@ -106,7 +106,7 @@ export const signIn = createAsyncThunk<User, AsyncThunkArgSignIn>(
         const message = getErrorMessageByStatusCode(data.status);
         throw new Error(message);
       }
-    } catch (error): any {
+    } catch (error: any) {
       arg.callbackFail(error.message);
       return rejectWithValue(error.message);
     }
