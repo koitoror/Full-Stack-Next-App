@@ -264,7 +264,9 @@ const todoSlice = createSlice({
       if (action.payload) {
         for (let i = 0; i < state.todos.length; i++) {
           if (state.todos[i].id === action.payload.id) {
-            state.todos[i].completed = action.payload.updatedFields.completed;
+            if (action.payload.updatedFields && action.payload.updatedFields.completed !== undefined) {
+              state.todos[i].completed = action.payload.updatedFields.completed;
+            }
             break;
           }
         }
