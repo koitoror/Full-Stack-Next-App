@@ -1,7 +1,7 @@
 import Cors from 'cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 // Import the necessary types from Firebase
-import type { DocumentData, CollectionReference, DocumentReference } from 'firebase/firestore/lite';
+import type { DocumentData, CollectionReference, DocumentReference, FirestoreErrorCode } from 'firebase/firestore/lite';
 
 import {
   collection,
@@ -89,14 +89,16 @@ const removeTodo = async (id: string): Promise<RemoveTodoResult> => {
 }
 
 class CustomError extends Error {
-  constructor(message?: string) {
+  // Add a custom code property
+  code?: FirestoreErrorCode;
+
+  constructor(message?: string, code?: FirestoreErrorCode) {
     super(message);
+    this.code = code;
+
     // Set the prototype explicitly
     Object.setPrototypeOf(this, CustomError.prototype);
   }
-
-  // Add any additional properties needed, in this case, 'code'
-  code?: string;
 }
 
 const handler = async (
