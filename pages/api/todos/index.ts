@@ -55,6 +55,9 @@ const getTodos = async (): Promise<GetTodosResult> => {
 
 const addTodo = async (todo: Todo): Promise<AddTodoResult> => {
   try {
+    if (!collectionName) {
+      throw new Error('Collection name is not defined');
+    }
     const docRef = await addDoc(collection(db, collectionName), todo);
     const modifyTodo = { id: docRef.id, ...todo };
     return { todo: modifyTodo, status: StatusCode.CREATED };
