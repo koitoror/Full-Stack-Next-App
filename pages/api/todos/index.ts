@@ -29,17 +29,21 @@ const collectionName = process.env.FIREBASE_TODOS_COLLECTION;
 
 const getTodos = async (): Promise<GetTodosResult> => {
   try {
+    if (!collectionName) {
+      throw new Error('Collection name is not defined');
+    }
+
     const querySnapshot = await getDocs(collection(db, collectionName));
-    const todos = []
+    const todos = [];
     querySnapshot.forEach(doc => {
       const todo = doc.data();
       todo.id = doc.id;
       todos.push(todo);
-    })
+    });
     return { todos, status: StatusCode.OK };
-  } catch (_error) {
+  } catch (error) {
     const error: FirestoreError = _error;
-    let status = StatusCode.BAD_REQUEST;
+    const status = StatusCode.BAD_REQUEST;
     return { error, status };
   }
 };
