@@ -4,8 +4,7 @@ import {
   AuthError,
   User,
   getAuth,
-  createUserWithEmailAndPassword,
-  FirebaseAuthError
+  createUserWithEmailAndPassword
 } from 'firebase/auth';
 import { StatusCode } from '../statusCodes';
 import { runMiddleware } from '../middleware';
