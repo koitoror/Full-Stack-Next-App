@@ -1,7 +1,7 @@
 export async function getServerSideProps() {
   return {
     redirect: {
-      destination: 'https://github.com/sk1t0n',
+      destination: 'https://github.com/koitoror',
       permanent: false
     }
   };
