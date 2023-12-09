@@ -61,7 +61,7 @@ const getErrorMessageByStatusCode = (status: StatusCode): string => {
   return message;
 }
 
-const API_HOST = process.env.API_HOST;
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 console.log('API_HOST  → ', API_HOST)
 // const API_HOST = '/api';
 
