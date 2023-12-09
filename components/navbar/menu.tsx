@@ -88,7 +88,8 @@ const _Menu: React.FC<any> = ({
 
         <Menu.Item key={key}>
           <Link href={path}>
-            <a>{needUpperCase ? text.toUpperCase() : text}</a>
+            {/* <a>{needUpperCase ? text.toUpperCase() : text}</a> */}
+            {needUpperCase ? text.toUpperCase() : text}
           </Link>
         </Menu.Item>
       ))}
@@ -98,7 +99,8 @@ const _Menu: React.FC<any> = ({
 
         <Menu.Item key={key}>
           <Link href={path}>
-            <a>{needUpperCase ? text.toUpperCase() : text}</a>
+            {/* <a>{needUpperCase ? text.toUpperCase() : text}</a> */}
+            {needUpperCase ? text.toUpperCase() : text}
           </Link>
         </Menu.Item>
       ))}

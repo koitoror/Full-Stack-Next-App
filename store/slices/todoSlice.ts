@@ -61,7 +61,8 @@ const getErrorMessageByStatusCode = (status: StatusCode): string => {
   return message;
 }
 
-const API_HOST = process.env.API_HOST;
+// const API_HOST = process.env.API_HOST;
+const API_HOST = '/api';
 
 export const getTodos = createAsyncThunk<Array<Todo>, AsyncThunkArgGetTodos>(
   'todos/getTodos',
