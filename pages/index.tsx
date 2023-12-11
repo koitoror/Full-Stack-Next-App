@@ -12,7 +12,9 @@ const Home: React.FC = () => {
 
 
   useEffect(() => {
-    let callbackFail: (message: string) => void;
+    // let callbackFail: (message: string) => void;
+    let callbackFail: (message: message) => void;
+
     callbackFail = (errorMessage) => message.error(errorMessage);
     
     // Dispatch the asynchronous action

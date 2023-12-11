@@ -28,6 +28,8 @@ export type AddTodoResult = {
 type Response = GetTodosResult | AddTodoResult;
 
 const collectionName = process.env.FIREBASE_TODOS_COLLECTION;
+console.log('collectionName  → ', collectionName)
+
 
 const getTodos = async (): Promise<GetTodosResult> => {
   try {
