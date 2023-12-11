@@ -7,13 +7,16 @@ import { RootState, AppDispatch } from '../store';
 import TodoList from '../components/todos/TodosList';
 import AddTodo from '../components/todos/AddTodo';
 
+
+type typeMessage = typeof message
+
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
 
   useEffect(() => {
     // let callbackFail: (message: string) => void;
-    let callbackFail: (message: message) => void;
+    let callbackFail: (message: typeMessage) => void;
 
     callbackFail = (errorMessage) => message.error(errorMessage);
     
