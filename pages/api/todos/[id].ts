@@ -32,7 +32,7 @@ export type RemoveTodoResult = {
 
 type Response = UpdateTodoResult | RemoveTodoResult;
 
-const collectionName: string = process.env.FIREBASE_TODOS_COLLECTION || '';
+const collectionName: string = process.env.NEXT_PUBLIC_FIREBASE_TODOS_COLLECTION || '';
 
 const updateTodo = async (id: string, fieldsToUpdate: Partial<Todo>): Promise<UpdateTodoResult> => {
   try {

@@ -27,7 +27,7 @@ export type AddTodoResult = {
 
 type Response = GetTodosResult | AddTodoResult;
 
-const collectionName = process.env.FIREBASE_TODOS_COLLECTION;
+const collectionName = process.env.NEXT_PUBLIC_FIREBASE_TODOS_COLLECTION;
 console.log('collectionName  → ', collectionName)
 
 
