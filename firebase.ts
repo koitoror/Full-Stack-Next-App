@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { getApps, getApp, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
 import type { Firestore } from 'firebase/firestore/lite';
 
@@ -11,10 +11,14 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-console.log('firebaseConfig  → ', firebaseConfig)
+// console.log('firebaseConfig  → ', firebaseConfig)
 
+// const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
+// const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
 export default app;
 
 // export const db: Firestore = getFirestore(app);

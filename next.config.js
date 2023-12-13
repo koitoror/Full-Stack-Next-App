@@ -17,4 +17,27 @@ module.exports = withLess({
     additionalData: content =>
       `${content}\n\n@import '${pathToLessFileWithVariables}';`,
   },
+  transpilePackages: [
+    "antd",
+    "rc-util",
+    "@babel/runtime",
+    "@ant-design/icons",
+    "@ant-design/icons-svg",
+    "rc-pagination",
+    "rc-picker",
+    "rc-tree",
+    "rc-table",
+  ],
 });
+
+
+// const nextConfig = {
+//   transpilePackages: [
+//     "antd",
+//     "@babel/runtime",
+//     "@ant-design/icons",
+//     "@ant-design/icons-svg",
+//   ],
+// };
+
+// module.exports = nextConfig;

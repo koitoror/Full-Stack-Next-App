@@ -33,7 +33,7 @@ console.log('collectionName  → ', collectionName)
 
 const getTodos = async (): Promise<GetTodosResult> => {
   try {
-    console.log('collectionName  getTodos → ', collectionName)
+    // console.log('collectionName  getTodos → ', collectionName)
     if (!collectionName) {
       throw new Error('Collection name is not defined');
     }
