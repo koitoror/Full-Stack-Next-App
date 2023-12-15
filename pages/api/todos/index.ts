@@ -39,7 +39,7 @@ const getTodos = async (): Promise<GetTodosResult> => {
       throw new Error('Collection name is not defined');
     }
 
-    const querySnapshot = await getDoc(collection(db, collectionName));
+    const querySnapshot = await getDocs(collection(db, collectionName));
     const todos: Todo[] = [];
     console.log('querySnapshot → ', querySnapshot);
     
