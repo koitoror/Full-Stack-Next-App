@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   collection,
   getDocs,
+  getDoc,
   addDoc,
   FirestoreError
 } from 'firebase/firestore/lite';
@@ -33,13 +34,15 @@ console.log('collectionName  → ', collectionName)
 
 const getTodos = async (): Promise<GetTodosResult> => {
   try {
-    // console.log('collectionName  getTodos → ', collectionName)
+    console.log('collectionName  getTodos → ', collectionName)
     if (!collectionName) {
       throw new Error('Collection name is not defined');
     }
 
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    const querySnapshot = await getDoc(collection(db, collectionName));
     const todos: Todo[] = [];
+    console.log('querySnapshot → ', querySnapshot);
+    
 
     querySnapshot.forEach(doc => {
       const todoData = doc.data() as Todo;
