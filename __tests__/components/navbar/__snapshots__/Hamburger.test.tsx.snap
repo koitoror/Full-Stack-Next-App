@@ -5,15 +5,15 @@ exports[`Hamburger check the snapshot 1`] = `
   <div
     class="sc-bdfCDU gcCQLz"
   >
-        <div
-          class="sc-gsTDqH cThqpc"
-        />
-        <div
-          class="sc-dlfmHC hGXgQp"
-        />
-        <div
-          class="sc-hKgKIp jnEZPG"
-        />
+    <div
+      class="sc-gsTDqH cThqpc"
+    />
+    <div
+      class="sc-dlfmHC hGXgQp"
+    />
+    <div
+      class="sc-hKgKIp jnEZPG"
+    />
   </div>
 </DocumentFragment>
 `;
