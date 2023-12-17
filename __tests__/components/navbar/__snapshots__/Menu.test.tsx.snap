@@ -3,8 +3,7 @@
 exports[`Menu check the snapshot 1`] = `
 <DocumentFragment>
   <ul
-    class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark"
-    data-menu-list="true"
+    class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark css-dev-only-do-not-override-1g853jt"  data-menu-list="true"
     role="menu"
     tabindex="0"
   >
