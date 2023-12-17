@@ -3,7 +3,7 @@
 exports[`check the snapshot 1`] = `
 <DocumentFragment>
   <footer
-    class="ant-layout-footer footer"
+    class="ant-layout-footer footer css-dev-only-do-not-override-1g853jt"
   >
     Copyright © 2023
   </footer>
