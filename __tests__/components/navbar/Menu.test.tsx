@@ -25,10 +25,10 @@ describe('Menu', () => {
             { key: 'home', text: 'Home', path: '/' },
             { key: 'about', text: 'About', path: '/about' }
           ],
-          rightMenu: [
-            { key: 'register', text: 'Register', path: '/register' },
-            { key: 'sign-in', text: 'Sign In', path: '/sign-in' }
-          ],
+      rightMenu: [
+        { key: 'register', text: 'Register', path: '/register' },
+        { key: 'sign-in', text: 'Sign In', path: '/sign-in' }
+      ],
       length: 2, // Update length based on menu items
       pop: () => ({ key: 'removed', text: 'Removed', path: '' }), // Implement or mock function
       push: (menuItem) => { /* Implement or mock function */ return 3; }, // Update return value
