@@ -5,6 +5,9 @@ import {
   getDocs,
   getDoc,
   addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
   FirestoreError
 } from 'firebase/firestore/lite';
 import { db } from '../../../firebase';
@@ -30,32 +33,60 @@ type Response = GetTodosResult | AddTodoResult;
 
 const collectionName = process.env.NEXT_PUBLIC_FIREBASE_TODOS_COLLECTION;
 console.log('collectionName  → ', collectionName)
-
+console.log('#####################');
 
 const getTodos = async (): Promise<GetTodosResult> => {
   try {
     console.log('collectionName  getTodos → ', collectionName)
+    console.log('********************');
+    
     if (!collectionName) {
       throw new Error('Collection name is not defined');
     }
 
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    const todoRef = collection(db, 'todos')
+    // console.log('todoRef → ', todoRef);
+    
+    const querySnapshot = await getDocs(todoRef)
+    // console.log('querySnapshot → ', querySnapshot);
+
+
+    // const querySnapshot = await getDocs(collection(db, "todos"));
+
+
     const todos: Todo[] = [];
     console.log('querySnapshot → ', querySnapshot);
     
-
     querySnapshot.forEach(doc => {
       const todoData = doc.data() as Todo;
       const todo: Todo = { id: doc.id, ...todoData };
       todos.push(todo);
     });
-
+    console.log('todos → ', todos);
+    
     return { todos, status: StatusCode.OK };
-  } catch (error: any) {
-    const firestoreError: FirestoreError = error;
-    const status = StatusCode.BAD_REQUEST;
-    return { error: firestoreError, status };
+  } catch (_error) {
+    if (_error instanceof FirestoreError) {
+      const error: FirestoreError = _error;
+      let status = StatusCode.BAD_REQUEST;
+      console.log('error → ', error);
+      console.log('status → ', status);
+
+      if (error.code === 'permission-denied') {
+        status = StatusCode.UNAUTHORIZED;
+      }
+
+      return { error, status };
+    } else {
+      // If it's not a FirestoreError, handle it or rethrow
+      throw _error;
+    }
   }
+  // catch (error: any) {
+  //   const firestoreError: FirestoreError = error;
+  //   const status = StatusCode.BAD_REQUEST;
+  //   return { error: firestoreError, status };
+  // }
 };
 
 
@@ -67,6 +98,8 @@ const addTodo = async (todo: Todo): Promise<AddTodoResult> => {
     }
     
     const docRef = await addDoc(collection(db, collectionName), todo);
+    console.log('docRef → ', docRef);
+
     const modifyTodo = { id: docRef.id, ...todo };
 
     return { todo: modifyTodo, status: StatusCode.CREATED };
@@ -99,15 +132,18 @@ const handler = async (
 
   if (req.method === 'GET') {
     const result = await getTodos();
+    console.log('result  → ', result)
+    
     res.status(result.status).json(result);
   }
-
+  
   if (req.method === 'POST') {
     const newTodo: Todo = {
       completed: !!req.body.completed,
       text: req.body.text as string
     };
     const result = await addTodo(newTodo);
+    console.log('newTodo → result  → ', result)
     res.status(result.status).json(result);
   }
 };

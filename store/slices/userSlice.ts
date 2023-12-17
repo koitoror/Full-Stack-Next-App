@@ -68,6 +68,8 @@ export const registerUser = createAsyncThunk<User, AsyncThunkArgRegisterUser>(
   async (arg, { rejectWithValue }) => {
     try {
       const dataToSerialize = { email: arg.email, password: arg.password };
+      console.log('dataToSerialize → ', dataToSerialize);
+      
       const response = await fetch(`${API_HOST}/users/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -28,6 +28,10 @@ const AddTodo: React.FC = () => {
       text,
       callbackSuccess: () => message.info('Task was successfully added!'),
       callbackFail: (error) => {
+        // console.log( error.toString());
+        // console.log(error.message);
+        // console.log(error.lineno);
+        // console.log(JSON.parse(error));
         console.error('Error adding todo:', error);
       },
     };
@@ -52,6 +56,10 @@ const AddTodo: React.FC = () => {
       }
       // form.resetFields();
     } catch (error) {
+      // console.log( error.toString());
+      // console.log(error.message);
+      // console.log(error.lineno);
+      // console.log(JSON.parse('Error adding todo:', error));
       console.error('Error adding todo:', error);
     }
   };
