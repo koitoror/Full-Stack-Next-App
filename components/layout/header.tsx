@@ -84,7 +84,7 @@ const Header: React.FC = () => {
                 title="Navigation"
                 placement="left"
                 closable={false}
-                visible={visibleDrawer}
+                open={visibleDrawer}
                 onClose={closeDrawerHandler}
               >
                 <Menu
