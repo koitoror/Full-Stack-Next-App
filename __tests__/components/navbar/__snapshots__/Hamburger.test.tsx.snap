@@ -3,16 +3,16 @@
 exports[`Hamburger check the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="hamburger__Button-sc-1cfzf5o-0 ZPuhh"
+    class="sc-bdfCDU gcCQLz"
   >
     <div
-      class="hamburger__Line1-sc-1cfzf5o-1 jGomaN"
+      class="sc-gsTDqH cThqpc"
     />
     <div
-      class="hamburger__Line2-sc-1cfzf5o-2 iCtxxV"
+      class="sc-dlfmHC hGXgQp"
     />
     <div
-      class="hamburger__Line3-sc-1cfzf5o-3 eqZccE"
+      class="sc-hKgKIp jnEZPG"
     />
   </div>
 </DocumentFragment>

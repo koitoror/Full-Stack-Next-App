@@ -1,4 +1,15 @@
-module.exports = {
+const nextJest = require("next/jest");
+const createJestConfig = nextJest({
+  dir: "./",
+});
+const customJestConfig = {
+  roots: ['<rootDir>'],
+  transform: {
+    '^.+\\.ts?$': 'ts-jest'
+  },
+  // testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$',
+  moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx', 'json', 'node'],
+  clearMocks: true,
   coverageDirectory: 'coverage',
   collectCoverage: true,
   collectCoverageFrom: [
@@ -12,10 +23,20 @@ module.exports = {
     '!<rootDir>/src/templates/**/*.{js,jsx,ts,tsx}',
     '!<rootDir>/node_modules/',
   ],
-
-  testEnvironment: 'jsdom',
-  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/', '/.out/', '/public/'],
 
-  setupFilesAfterEnv: ['<rootDir>/.jest/setup-tests.js'],
+  preset: 'ts-jest',
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
+  setupFilesAfterEnv: ['<rootDir>/.jest/setupTests.ts'],
+  moduleDirectories: ["node_modules", "<rootDir>/"],
+  // testEnvironment: "jest-environment-jsdom",
+  testEnvironment: 'jsdom',
+  // testEnvironment: 'node',
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/fileMock.js',
+    '\\.(css|less)$': 'identity-obj-proxy',
+  },
+
 };
+module.exports = createJestConfig(customJestConfig);

@@ -3,13 +3,13 @@
 exports[`Header check the snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="ant-layout-header header"
+    class="ant-layout-header header css-dev-only-do-not-override-1g853jt"
   >
     <div
-      class="ant-row"
+      class="ant-row css-dev-only-do-not-override-1g853jt"
     >
       <div
-        class="ant-col logo"
+        class="ant-col logo css-dev-only-do-not-override-1g853jt"
         style="flex: 0 0 100px;"
       >
         <div>
@@ -17,17 +17,17 @@ exports[`Header check the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-col"
+        class="ant-col css-dev-only-do-not-override-1g853jt"
         style="flex-basis: auto;"
       >
         <div
-          class="ant-row ant-row-space-between"
+          class="ant-row ant-row-space-between css-dev-only-do-not-override-1g853jt"
         >
           <div
-            class="ant-col ant-col-xs-0 ant-col-sm-0 ant-col-md-24"
+            class="ant-col ant-col-xs-0 ant-col-sm-0 ant-col-md-24 css-dev-only-do-not-override-1g853jt"
           >
             <ul
-              class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark"
+              class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark css-dev-only-do-not-override-1g853jt"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -143,19 +143,19 @@ exports[`Header check the snapshot 1`] = `
             />
           </div>
           <div
-            class="ant-col ant-col-xs-4 ant-col-xs-offset-20 ant-col-sm-3 ant-col-sm-offset-21 ant-col-md-0"
+            class="ant-col ant-col-xs-4 ant-col-xs-offset-20 ant-col-sm-3 ant-col-sm-offset-21 ant-col-md-0 css-dev-only-do-not-override-1g853jt"
           >
             <div
-              class="hamburger__Button-sc-1cfzf5o-0 ZPuhh"
+              class="sc-bdfCDU gcCQLz hamburger"
             >
               <div
-                class="hamburger__Line1-sc-1cfzf5o-1 jGomaN"
+                class="sc-gsTDqH cThqpc"
               />
               <div
-                class="hamburger__Line2-sc-1cfzf5o-2 iCtxxV"
+                class="sc-dlfmHC hGXgQp"
               />
               <div
-                class="hamburger__Line3-sc-1cfzf5o-3 eqZccE"
+                class="sc-hKgKIp jnEZPG"
               />
             </div>
           </div>
