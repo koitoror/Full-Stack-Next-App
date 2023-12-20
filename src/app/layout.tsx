@@ -25,7 +25,8 @@ export const RootLayout = ({ children }: React.PropsWithChildren) => (
     <html lang="en">
       <body className={inter.className}>
         {children}
-        <Analytics mode={'production'} />;
+        {/* <Analytics mode={'production'} />; */}
+        <Analytics />;
       </body>
     </html>
   );
